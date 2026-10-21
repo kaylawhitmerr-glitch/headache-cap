@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Headache Comfort Cap</title>
+<style>
+/* ===== STYLES ===== */
+:root {
+  --bg: #f6f4f1;
+  --surface: #ffffff;
+  --text: #1f2328;
+  --muted: #5d6470;
+  --border: #dcd8d2;
+  --accent: #2f6f6a;
+  --accent-ink: #ffffff;
+  --accent-soft: #e2efed;
+  --warn-bg: #fff4d6;
+  --warn-ink: #5c4300;
+  --danger: #a8322d;
+  --heat: #c8553d;
+  --cool: #3a7ca5;
+  --radius: 10px;
+  --gap: 16px;
+  --nav-h: 60px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.45;
+  overflow-x: hidden;
+}
+[hidden] { display: none !important; }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 12px; }
+h2 { font-size: 1.3rem; }
+h3 { font-size: 1.05rem; }
+p { margin: 0 0 12px; }
+img, svg { max-width: 100%; }
+a { color: var(--accent); }
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--gap);
+}
+
+/* Header */
+.app-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.app-header .page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 52px;
+  flex-wrap: wrap;
+}
+.app-title { font-size: 1.05rem; font-weight: 700; margin: 0; }
+.sim-tag {
+  font-size: 0.75rem;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+
+/* Banner + session bar */
+.banner {
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  font-size: 0.9rem;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.session-bar {
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 8px 0;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.session-bar .page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.session-bar .bar-text { font-weight: 600; }
+.session-bar .bar-time { font-variant-numeric: tabular-nums; opacity: 0.9; margin-left: 6px; font-weight: 400; }
+.session-bar a, .session-bar .btn-bar {
+  color: var(--accent);
+  background: var(--accent-ink);
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Main */
+main#app {
+  padding-top: var(--gap);
+  padding-bottom: calc(var(--nav-h) + 24px);
+  min-height: 50vh;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--gap);
+  margin-bottom: var(--gap);
+}
+.muted { color: var(--muted); }
+.error { color: var(--danger); font-weight: 600; }
+.note { font-size: 0.85rem; color: var(--muted); }
+
+/* Forms + buttons */
+label { display: block; font-weight: 600; margin-bottom: 6px; }
+input[type="text"], input[type="number"], input[type="datetime-local"], select {
+  width: 100%;
+  max-width: 100%;
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  min-height: 44px;
+}
+input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.field { margin-bottom: var(--gap); }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font: inherit;
+  font-weight: 600;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-secondary { background: var(--surface); color: var(--accent); }
+.btn-danger { background: var(--surface); color: var(--danger); border-color: var(--danger); }
+.btn-block { width: 100%; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Bottom nav */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--nav-h);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  z-index: 10;
+}
+.bottom-nav ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 720px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.bottom-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-top: 3px solid transparent;
+}
+.bottom-nav a.active {
+  color: var(--accent);
+  border-top-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Footer */
+.app-footer {
+  padding: 8px 0 calc(var(--nav-h) + 16px);
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+}
+body.no-nav main#app { padding-bottom: 24px; }
+body.no-nav .app-footer { padding-bottom: 16px; }
+.link-btn {
+  background: none;
+  border: 0;
+  padding: 8px;
+  font: inherit;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+@media (min-width: 720px) {
+  .app-title { font-size: 1.2rem; }
+}
+
+@media print {
+  .bottom-nav, .banner, .session-bar, .btn, .btn-bar, .link-btn, button, .app-footer { display: none !important; }
+  body { background: #ffffff; }
+  main#app { padding: 0; }
+  .card { border: 0; padding: 0; }
+}
+</style>
+</head>
+<body>
+<!-- ===== SHELL ===== -->
+<header class="app-header">
+  <div class="page">
+    <p class="app-title">Headache Comfort Cap</p>
+    <span class="sim-tag">Simulated cap</span>
+  </div>
+</header>
+<div id="banner" class="banner" role="status" hidden></div>
+<div id="session-bar" class="session-bar" hidden></div>
+<main id="app" class="page" tabindex="-1"></main>
+<nav id="bottom-nav" class="bottom-nav" aria-label="Main" hidden>
+  <ul>
+    <li><a href="#/cap" data-tab="cap">Cap</a></li>
+    <li><a href="#/log" data-tab="log">Log</a></li>
+    <li><a href="#/insights" data-tab="insights">Insights</a></li>
+    <li><a href="#/share" data-tab="share">Share</a></li>
+  </ul>
+</nav>
+<footer class="app-footer">
+  <button type="button" id="reset-link" class="link-btn">Reset to mock data</button>
+</footer>
+
+<script src="mock-data.js"></script>
+<script>
+(function () {
+"use strict";
+
+/* ===== UTIL ===== */
+var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+var LOCAL_RE = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/;
+
+function pad2(n) { return (n < 10 ? "0" : "") + n; }
+
+function newId() {
+  var chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+  var r = "";
+  for (var i = 0; i < 3; i++) r += chars.charAt(Math.floor(Math.random() * chars.length));
+  return "e_" + Date.now().toString(36) + "_" + r;
+}
+
+function fmtLocal(d) {
+  return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate()) +
+    "T" + pad2(d.getHours()) + ":" + pad2(d.getMinutes()) + ":" + pad2(d.getSeconds());
+}
+
+function nowLocal() { return fmtLocal(new Date()); }
+
+// Returns a Date in local time, or null when the string is not a valid local date-time.
+function parseLocal(s) {
+  if (typeof s !== "string") return null;
+  var m = LOCAL_RE.exec(s);
+  if (!m) return null;
+  var y = +m[1], mo = +m[2], d = +m[3], h = +m[4], mi = +m[5], se = m[6] ? +m[6] : 0;
+  if (mo < 1 || mo > 12 || h > 23 || mi > 59 || se > 59) return null;
+  var dt = new Date(y, mo - 1, d, h, mi, se);
+  if (dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== d) return null;
+  return dt;
+}
+
+function addMinutes(s, minutes) {
+  var d = parseLocal(s);
+  if (!d) return null;
+  return fmtLocal(new Date(d.getTime() + minutes * 60000));
+}
+
+function fmtDate(s) {
+  var d = parseLocal(s);
+  if (!d) return "";
+  return WEEKDAYS[(d.getDay() + 6) % 7].slice(0, 3) + ", " + MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+}
+
+function fmtTime(s) {
+  var d = parseLocal(s);
+  if (!d) return "";
+  var h = d.getHours();
+  var ap = h < 12 ? "AM" : "PM";
+  var h12 = h % 12 === 0 ? 12 : h % 12;
+  return h12 + ":" + pad2(d.getMinutes()) + " " + ap;
+}
+
+// morning 5-12, afternoon 12-17, evening 17-22, night 22-5
+function timeBucket(s) {
+  var d = parseLocal(s);
+  if (!d) return null;
+  var h = d.getHours();
+  if (h >= 5 && h < 12) return "morning";
+  if (h >= 12 && h < 17) return "afternoon";
+  if (h >= 17 && h < 22) return "evening";
+  return "night";
+}
+
+// 0 = Monday ... 6 = Sunday
+function weekdayOf(s) {
+  var d = parseLocal(s);
+  if (!d) return null;
+  return (d.getDay() + 6) % 7;
+}
+
+// Monday of that week as "YYYY-MM-DD"
+function weekStart(s) {
+  var d = parseLocal(s);
+  if (!d) return null;
+  var m = new Date(d.getFullYear(), d.getMonth(), d.getDate() - ((d.getDay() + 6) % 7));
+  return m.getFullYear() + "-" + pad2(m.getMonth() + 1) + "-" + pad2(m.getDate());
+}
+
+function fmtClock(totalSeconds) {
+  var t = Math.max(0, Math.floor(totalSeconds));
+  var h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), sec = t % 60;
+  return (h > 0 ? h + ":" + pad2(m) : String(m)) + ":" + pad2(sec);
+}
+
+function esc(v) {
+  if (v === null || v === undefined) return "";
+  return String(v)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/* ===== STORE ===== */
+var Store = (function () {
+  var KEY = "hcc-prototype-v1";
+  var MSG_STORAGE = "Changes won't be saved in this browser.";
+  var MSG_SKIPPED = "Some saved entries couldn't be read and were left out.";
+  var MD = (typeof window !== "undefined" && window.MOCK_DATA) ? window.MOCK_DATA : {};
+  var S = null;
+  var persistent = true;
+  var banner = null;
+
+  function copy(o) { return o === undefined ? undefined : JSON.parse(JSON.stringify(o)); }
+  function ids(list) { return (Array.isArray(list) ? list : []).map(function (x) { return x && x.id; }); }
+  function has(list, v) { return list.indexOf(v) !== -1; }
+  function isObj(o) { return o !== null && typeof o === "object" && !Array.isArray(o); }
+  function isLocal(s) { return parseLocal(s) !== null; }
+  function isInt(n) { return typeof n === "number" && isFinite(n) && Math.floor(n) === n; }
+  function inRangeInt(n, lo, hi) { return n === null || (isInt(n) && n >= lo && n <= hi); }
+
+  function seedState() {
+    return {
+      version: 1,
+      account: null,
+      entries: copy(Array.isArray(MD.seedEntries) ? MD.seedEntries : []),
+      activeSession: null,
+      pendingSession: null
+    };
+  }
+
+  function validZones(zones) {
+    if (!Array.isArray(zones) || zones.length < 1) return false;
+    var zoneIds = ids(MD.zones), sideIds = ids(MD.sides), seen = [];
+    for (var i = 0; i < zones.length; i++) {
+      var z = zones[i];
+      if (!isObj(z)) return false;
+      if (!has(zoneIds, z.zone) || has(seen, z.zone)) return false;
+      seen.push(z.zone);
+      if (!has(sideIds, z.side)) return false;
+      if (!has(["heat", "cool", "off"], z.thermal)) return false;
+      if (typeof z.pressure !== "boolean") return false;
+      if (z.thermal === "off" && !z.pressure) return false;
+    }
+    return true;
+  }
+
+  function validTimer(t) {
+    return t === null || has(Array.isArray(MD.timerOptions) ? MD.timerOptions : [], t);
+  }
+
+  function validSessionCore(s, needEnd) {
+    if (!isObj(s)) return false;
+    if (!isLocal(s.startedAt)) return false;
+    if (needEnd && !isLocal(s.endedAt)) return false;
+    if (!needEnd && s.endedAt !== undefined) return false;
+    if (!validTimer(s.timerMinutes)) return false;
+    return validZones(s.zones);
+  }
+
+  function methodsUsed(session) {
+    var used = [];
+    if (!session) return used;
+    session.zones.forEach(function (z) {
+      if (z.thermal !== "off" && !has(used, z.thermal)) used.push(z.thermal);
+      if (z.pressure && !has(used, "pressure")) used.push("pressure");
+    });
+    return used;
+  }
+
+  function validateEntry(e) {
+    if (!isObj(e)) return false;
+    var fields = ["id", "occurredAt", "createdAt", "updatedAt", "logOnly", "session", "feedback",
+      "pain", "symptoms", "activity", "screenTimeHours", "waterGlasses", "caffeineDrinks"];
+    for (var i = 0; i < fields.length; i++) if (!(fields[i] in e)) return false;
+    if (typeof e.id !== "string" || !/^(e_[a-z0-9]+_[a-z0-9]{3}|seed_[0-9]+)$/.test(e.id)) return false;
+    if (!isLocal(e.occurredAt) || !isLocal(e.createdAt) || !isLocal(e.updatedAt)) return false;
+    if (typeof e.logOnly !== "boolean") return false;
+    if (e.logOnly && (e.session !== null || e.feedback !== null)) return false;
+    if (e.session !== null && !validSessionCore(e.session, true)) return false;
+    if (e.feedback !== null) {
+      var f = e.feedback;
+      if (!isObj(f) || !isObj(f.methods)) return false;
+      var used = methodsUsed(e.session);
+      var keys = Object.keys(f.methods);
+      for (var k = 0; k < keys.length; k++) {
+        if (!has(used, keys[k])) return false;
+        if (!has(["helped", "no", "unsure"], f.methods[keys[k]])) return false;
+      }
+      if (!("duration" in f)) return false;
+      if (f.duration !== null && !has(ids(MD.durationRanges), f.duration)) return false;
+    }
+    if (!inRangeInt(e.pain, 0, 10)) return false;
+    if (!Array.isArray(e.symptoms)) return false;
+    var symIds = ids(MD.symptoms), seenSym = [];
+    for (var j = 0; j < e.symptoms.length; j++) {
+      if (!has(symIds, e.symptoms[j]) || has(seenSym, e.symptoms[j])) return false;
+      seenSym.push(e.symptoms[j]);
+    }
+    if (e.activity !== null && !has(ids(MD.activities), e.activity)) return false;
+    var st = e.screenTimeHours;
+    if (st !== null && !(typeof st === "number" && isFinite(st) && st >= 0 && st <= 24 && isInt(st * 2))) return false;
+    if (!inRangeInt(e.waterGlasses, 0, 30)) return false;
+    if (!inRangeInt(e.caffeineDrinks, 0, 20)) return false;
+    return true;
+  }
+
+  function write() {
+    if (!persistent) return false;
+    try {
+      window.localStorage.setItem(KEY, JSON.stringify(S));
+      return true;
+    } catch (err) {
+      persistent = false;
+      banner = MSG_STORAGE;
+      return false;
+    }
+  }
+
+  function load() {
+    var raw;
+    try {
+      raw = window.localStorage.getItem(KEY);
+    } catch (err) {
+      persistent = false;
+      banner = MSG_STORAGE;
+      S = seedState();
+      return;
+    }
+    if (raw === null || raw === undefined) {
+      S = seedState();
+      write();
+      return;
+    }
+    var parsed = null;
+    try { parsed = JSON.parse(raw); } catch (err) { parsed = null; }
+    if (!isObj(parsed) || parsed.version !== 1) {
+      banner = MSG_STORAGE;
+      S = seedState();
+      write();
+      return;
+    }
+    var st = seedState();
+    var acct = parsed.account;
+    var codes = Array.isArray(MD.validCodes) ? MD.validCodes : [];
+    st.account = (isObj(acct) && typeof acct.code === "string" && has(codes, acct.code)) ? { code: acct.code, createdAt: acct.createdAt || nowLocal() } : null;
+    var list = Array.isArray(parsed.entries) ? parsed.entries : [];
+    var kept = [], dropped = !Array.isArray(parsed.entries), seenIds = [];
+    list.forEach(function (e) {
+      if (validateEntry(e) && !has(seenIds, e.id)) { kept.push(e); seenIds.push(e.id); }
+      else dropped = true;
+    });
+    st.entries = kept;
+    st.activeSession = validSessionCore(parsed.activeSession, false) ? parsed.activeSession : null;
+    st.pendingSession = validSessionCore(parsed.pendingSession, true) ? parsed.pendingSession : null;
+    if (st.activeSession && st.pendingSession) st.activeSession = null;
+    if (dropped) banner = MSG_SKIPPED;
+    S = st;
+    write();
+  }
+
+  function indexOfEntry(id) {
+    for (var i = 0; i < S.entries.length; i++) if (S.entries[i].id === id) return i;
+    return -1;
+  }
+
+  function normalize(e) {
+    var out = copy(e) || {};
+    var defaults = { logOnly: true, session: null, feedback: null, pain: null, symptoms: [],
+      activity: null, screenTimeHours: null, waterGlasses: null, caffeineDrinks: null };
+    Object.keys(defaults).forEach(function (k) {
+      if (out[k] === undefined || (k !== "symptoms" && out[k] === "")) out[k] = copy(defaults[k]);
+    });
+    return out;
+  }
+
+  // Insert or update. Returns a copy of the saved entry, or null if it fails validation.
+  function saveEntry(e) {
+    var out = normalize(e);
+    var now = nowLocal();
+    if (!out.id) out.id = newId();
+    var idx = indexOfEntry(out.id);
+    out.createdAt = idx >= 0 ? S.entries[idx].createdAt : (out.createdAt || now);
+    out.updatedAt = now;
+    if (!out.occurredAt) out.occurredAt = now;
+    if (!validateEntry(out)) return null;
+    if (idx >= 0) S.entries[idx] = out; else S.entries.push(out);
+    write();
+    return copy(out);
+  }
+
+  function deleteEntry(id) {
+    var idx = indexOfEntry(id);
+    if (idx < 0) return false;
+    S.entries.splice(idx, 1);
+    write();
+    return true;
+  }
+
+  function getEntry(id) {
+    var idx = indexOfEntry(id);
+    return idx < 0 ? null : copy(S.entries[idx]);
+  }
+
+  function signUp(code) {
+    if (typeof code !== "string") return false;
+    var c = code.trim().toLowerCase();
+    if (!c) return false;
+    var codes = Array.isArray(MD.validCodes) ? MD.validCodes : [];
+    for (var i = 0; i < codes.length; i++) {
+      if (String(codes[i]).toLowerCase() === c) {
+        S.account = { code: codes[i], createdAt: nowLocal() };
+        write();
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function startSession(opts) {
+    if (S.activeSession || S.pendingSession || !isObj(opts)) return false;
+    var s = {
+      startedAt: nowLocal(),
+      timerMinutes: opts.timerMinutes === undefined ? null : opts.timerMinutes,
+      zones: copy(opts.zones)
+    };
+    if (!validSessionCore(s, false)) return false;
+    S.activeSession = s;
+    write();
+    return true;
+  }
+
+  function endSession(endedAt) {
+    if (!S.activeSession) return null;
+    var a = S.activeSession;
+    var p = { startedAt: a.startedAt, endedAt: isLocal(endedAt) ? endedAt : nowLocal(), timerMinutes: a.timerMinutes, zones: a.zones };
+    S.pendingSession = p;
+    S.activeSession = null;
+    write();
+    return copy(p);
+  }
+
+  function discardPending() {
+    if (!S.pendingSession) return false;
+    S.pendingSession = null;
+    write();
+    return true;
+  }
+
+  function reset() {
+    S = seedState();
+    banner = persistent ? null : MSG_STORAGE;
+    if (persistent) {
+      try { window.localStorage.removeItem(KEY); } catch (err) { /* handled by write */ }
+      write();
+    }
+  }
+
+  load();
+
+  var api = {
+    state: function () { return copy(S); },
+    saveEntry: saveEntry,
+    deleteEntry: deleteEntry,
+    getEntry: getEntry,
+    signUp: signUp,
+    startSession: startSession,
+    endSession: endSession,
+    pendingSession: function () { return copy(S.pendingSession); },
+    activeSession: function () { return copy(S.activeSession); },
+    discardPending: discardPending,
+    reset: reset,
+    validateEntry: validateEntry,
+    methodsUsed: function (session) { return methodsUsed(session); }
+  };
+  Object.defineProperty(api, "persistent", { get: function () { return persistent; }, enumerable: true });
+  Object.defineProperty(api, "banner", { get: function () { return banner; }, enumerable: true });
+  return api;
+})();
+
+/* ===== INSIGHTS ===== */
+// Pure functions: entries in, text out. Filled in a later step.
+// patternInsights(entries, md)      -> [{ ruleId, count, total, text }]
+// reliefBySetting(entries, md)      -> [{ zone, method, helped, rated, text }]
+// visibleSuggestions(patterns, md)  -> [{ id, ruleId, text }]
+// describeEntry(entry, md)          -> [string]   ("Your logged headache" lines)
+
+/* ===== CHARTS ===== */
+// SVG strings from given numbers only. Filled in a later step.
+// barChart({ labels, values, title })   -> string
+// dotChart({ points, yMax, title })     -> string
+
+/* ===== SCREENS ===== */
+function renderSignup(app) {
+  app.innerHTML =
+    '<section class="card">' +
+      "<h2>Set up your cap</h2>" +
+      '<p class="muted">Enter the personal code printed in your cap box.</p>' +
+      '<form id="signup-form" novalidate>' +
+        '<div class="field">' +
+          '<label for="signup-code">Cap code</label>' +
+          '<input type="text" id="signup-code" name="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="HCC-0000">' +
+        "</div>" +
+        '<p id="signup-error" class="error" role="alert" hidden></p>' +
+        '<button type="submit" class="btn btn-block">Create account</button>' +
+      "</form>" +
+    "</section>";
+  var form = app.querySelector("#signup-form");
+  var input = app.querySelector("#signup-code");
+  var err = app.querySelector("#signup-error");
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    if (Store.signUp(input.value)) {
+      go("#/cap");
+    } else {
+      err.textContent = "That code doesn't match a cap.";
+      err.hidden = false;
+      input.focus();
+    }
+  });
+}
+
+function renderStub(app, name) {
+  app.innerHTML = '<section class="card"><h2>' + esc(name) + "</h2></section>";
+}
+
+function renderCap(app) { renderStub(app, "Cap"); }
+function renderFeedback(app) { renderStub(app, "Feedback"); }
+function renderLog(app, params) {
+  renderStub(app, params && params.id ? "Your logged headache" : "Log");
+}
+function renderInsights(app) { renderStub(app, "Insights"); }
+function renderShare(app) { renderStub(app, "Share"); }
+
+/* ===== ROUTER ===== */
+var SCREENS = {
+  signup: renderSignup,
+  cap: renderCap,
+  feedback: renderFeedback,
+  log: renderLog,
+  insights: renderInsights,
+  share: renderShare
+};
+var currentRoute = null;
+var tickHandle = null;
+
+function go(hash) {
+  if (location.hash === hash) route();
+  else location.hash = hash;
+}
+
+function parseHash(h) {
+  var m = /^#\/([a-z]+)(?:\/([^\/]+))?$/.exec(h || "");
+  if (!m) return null;
+  var name = m[1];
+  var id = m[2] ? decodeURIComponent(m[2]) : null;
+  if (!SCREENS[name]) return null;
+  if (id !== null && name !== "log") return null;
+  return { name: name, id: id };
+}
+
+function gate(r) {
+  var st = Store.state();
+  if (!st.account) return (r && r.name === "signup" && !r.id) ? null : "#/signup";
+  if (!r || r.name === "signup") return "#/cap";
+  if (r.name === "feedback" && !st.pendingSession) return "#/cap";
+  return null;
+}
+
+function checkExpiredTimer() {
+  var a = Store.activeSession();
+  if (!a || a.timerMinutes === null) return false;
+  var start = parseLocal(a.startedAt);
+  if (!start) return false;
+  var end = start.getTime() + a.timerMinutes * 60000;
+  if (Date.now() >= end) {
+    Store.endSession(addMinutes(a.startedAt, a.timerMinutes));
+    return true;
+  }
+  return false;
+}
+
+function renderBanner() {
+  var el = document.getElementById("banner");
+  var msg = Store.banner;
+  if (msg) {
+    el.innerHTML = '<div class="page">' + esc(msg) + "</div>";
+    el.hidden = false;
+  } else {
+    el.innerHTML = "";
+    el.hidden = true;
+  }
+}
+
+function sessionTimeText(a) {
+  var start = parseLocal(a.startedAt);
+  if (!start) return "";
+  var elapsed = (Date.now() - start.getTime()) / 1000;
+  if (a.timerMinutes !== null) return fmtClock(a.timerMinutes * 60 - elapsed) + " left";
+  return fmtClock(elapsed) + " elapsed";
+}
+
+function renderSessionBar() {
+  var el = document.getElementById("session-bar");
+  var st = Store.state();
+  var onFeedback = currentRoute && currentRoute.name === "feedback";
+  if (!st.account || !currentRoute || currentRoute.name === "signup") {
+    el.hidden = true;
+    el.innerHTML = "";
+    el.removeAttribute("data-mode");
+    return;
+  }
+  if (st.activeSession) {
+    if (el.getAttribute("data-mode") !== "active") {
+      el.innerHTML = '<div class="page">' +
+        '<span class="bar-text">Session running<span class="bar-time" id="bar-time"></span></span>' +
+        '<button type="button" class="btn-bar" id="bar-end">End</button></div>';
+      el.setAttribute("data-mode", "active");
+      el.querySelector("#bar-end").addEventListener("click", function () {
+        Store.endSession();
+        go("#/feedback");
+      });
+    }
+    el.querySelector("#bar-time").textContent = "— " + sessionTimeText(st.activeSession);
+    el.hidden = false;
+  } else if (st.pendingSession && !onFeedback) {
+    if (el.getAttribute("data-mode") !== "pending") {
+      el.innerHTML = '<div class="page"><span class="bar-text">Session ended</span>' +
+        '<a href="#/feedback">Give feedback</a></div>';
+      el.setAttribute("data-mode", "pending");
+    }
+    el.hidden = false;
+  } else {
+    el.hidden = true;
+    el.innerHTML = "";
+    el.removeAttribute("data-mode");
+  }
+}
+
+function renderNav() {
+  var nav = document.getElementById("bottom-nav");
+  var show = !!(currentRoute && currentRoute.name !== "signup");
+  nav.hidden = !show;
+  document.body.classList.toggle("no-nav", !show);
+  var links = nav.querySelectorAll("a[data-tab]");
+  for (var i = 0; i < links.length; i++) {
+    var on = show && links[i].getAttribute("data-tab") === currentRoute.name;
+    links[i].classList.toggle("active", on);
+    if (on) links[i].setAttribute("aria-current", "page");
+    else links[i].removeAttribute("aria-current");
+  }
+}
+
+function tick() {
+  var a = Store.activeSession();
+  if (!a) {
+    renderSessionBar();
+    return;
+  }
+  if (checkExpiredTimer()) {
+    go("#/feedback");
+    return;
+  }
+  renderSessionBar();
+}
+
+function route() {
+  var r = parseHash(location.hash);
+  var target = gate(r);
+  if (target) {
+    if (location.hash === target) target = null;
+    else { location.replace(target); return; }
+  }
+  currentRoute = r;
+  var app = document.getElementById("app");
+  renderBanner();
+  renderNav();
+  renderSessionBar();
+  SCREENS[r.name](app, { id: r.id });
+  window.scrollTo(0, 0);
+}
+
+function start() {
+  document.getElementById("reset-link").addEventListener("click", function () {
+    if (window.confirm("Reset to mock data? This clears your entries and your account.")) {
+      Store.reset();
+      go("#/signup");
+    }
+  });
+  window.addEventListener("hashchange", route);
+  if (Store.state().account && checkExpiredTimer()) {
+    if (location.hash === "#/feedback") route();
+    else location.replace("#/feedback");
+  } else {
+    route();
+  }
+  tickHandle = window.setInterval(tick, 1000);
+}
+
+start();
+})();
+</script>
+</body>
+</html>
