@@ -4,7 +4,7 @@
 /* Head diagram */
 .screen-cap .cap-head { display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto 8px; }
 .screen-cap .cap-head-outline { fill: #f3e6da; stroke: var(--text); stroke-width: 2; stroke-linejoin: round; }
-.screen-cap .cap-head-hair { fill: #6b5444; opacity: 0.85; }
+.screen-cap .cap-head-hair { fill: #3b2f5c; opacity: 0.85; }
 .screen-cap .cap-head-ear { fill: #f3e6da; stroke: var(--text); stroke-width: 2; stroke-linecap: round; }
 .screen-cap .cap-head-line { fill: none; stroke: var(--text); stroke-width: 1.6; stroke-linecap: round; }
 .screen-cap .cap-head-side { font-size: 11px; fill: var(--muted); }
@@ -17,8 +17,8 @@
 .screen-cap .cap-hz-shape .cap-hs-pressure > *,
 .screen-cap .cap-hz-shape .cap-hs-heat > *,
 .screen-cap .cap-hz-shape .cap-hs-cool > * { stroke: var(--text); stroke-dasharray: none; fill: var(--accent-soft); }
-.screen-cap .cap-hz-shape .cap-hs-heat > * { fill: var(--heat); }
-.screen-cap .cap-hz-shape .cap-hs-cool > * { fill: var(--cool); }
+.screen-cap .cap-hz-shape .cap-hs-heat > * { fill: var(--heat); filter: drop-shadow(0 0 6px rgba(251, 124, 90, 0.8)); }
+.screen-cap .cap-hz-shape .cap-hs-cool > * { fill: var(--cool); filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.8)); }
 .screen-cap .cap-hz-shape .cap-hs-press > * { stroke-width: 3; }
 .screen-cap .cap-hz.is-on .cap-hz-label { fill: var(--text); }
 .screen-cap .cap-hz.is-selected .cap-hz-shape > * > * { stroke: var(--accent); stroke-width: 3.5; }
@@ -38,7 +38,7 @@
   color: var(--text);
   cursor: pointer;
 }
-.screen-cap .cap-chip.is-on { background: var(--accent-soft); border-color: var(--accent); font-weight: 600; }
+.screen-cap .cap-chip.is-on { background: var(--accent-soft); border-color: var(--accent); font-weight: 600; box-shadow: 0 0 12px rgba(167, 139, 250, 0.45); }
 .screen-cap .cap-chip.is-on::before { content: "\2713  "; color: var(--accent); }
 .screen-cap .cap-chip.is-selected { outline: 2px solid var(--accent); outline-offset: 1px; }
 
@@ -60,7 +60,7 @@
   color: var(--accent);
   cursor: pointer;
 }
-.screen-cap .cap-seg-btn.is-on { background: var(--accent); color: var(--accent-ink); }
+.screen-cap .cap-seg-btn.is-on { background: var(--accent); color: var(--accent-ink); box-shadow: 0 0 14px rgba(167, 139, 250, 0.6); }
 .screen-cap .cap-seg-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .screen-cap .cap-hint { margin: 8px 0 0; font-size: 0.9rem; }
 
@@ -70,13 +70,13 @@
 .screen-cap .cap-mk-view figcaption { font-size: 0.9rem; font-weight: 600; color: var(--muted); }
 .screen-cap .cap-mk { display: block; width: 100%; height: auto; }
 .screen-cap .cap-mk-head { fill: #f3e6da; stroke: var(--text); stroke-width: 1.8; stroke-linejoin: round; }
-.screen-cap .cap-mk-shell { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
-.screen-cap .cap-mk-strap { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round; }
-.screen-cap .cap-mk-cover { fill: #4a4f57; stroke: var(--text); stroke-width: 1.5; }
+.screen-cap .cap-mk-shell { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.55)); }
+.screen-cap .cap-mk-strap { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(167, 139, 250, 0.7)); }
+.screen-cap .cap-mk-cover { fill: #2a2650; stroke: var(--text); stroke-width: 1.5; }
 .screen-cap .cap-pad > * { fill: var(--surface); stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 3 2; }
 .screen-cap .cap-pad-neutral > * { fill: var(--surface); stroke: var(--text); stroke-dasharray: none; }
-.screen-cap .cap-pad-heat > * { fill: var(--heat); stroke: var(--text); stroke-dasharray: none; }
-.screen-cap .cap-pad-cool > * { fill: var(--cool); stroke: var(--text); stroke-dasharray: none; }
+.screen-cap .cap-pad-heat > * { fill: var(--heat); stroke: var(--text); stroke-dasharray: none; filter: drop-shadow(0 0 5px rgba(251, 124, 90, 0.85)); }
+.screen-cap .cap-pad-cool > * { fill: var(--cool); stroke: var(--text); stroke-dasharray: none; filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.85)); }
 .screen-cap .cap-pmark circle { fill: var(--surface); stroke: var(--text); stroke-width: 1.4; }
 .screen-cap .cap-pmark .cap-pmark-dot { fill: var(--text); stroke: none; }
 
@@ -101,7 +101,7 @@
 .screen-cap .cap-sw-heat { background: var(--heat); }
 .screen-cap .cap-sw-cool { background: var(--cool); }
 .screen-cap .cap-sw-pressure { background: radial-gradient(circle, var(--text) 0 2px, var(--surface) 3px); border-radius: 50%; }
-.screen-cap .cap-sw-cover { background: #4a4f57; }
+.screen-cap .cap-sw-cover { background: #2a2650; }
 
 .screen-cap .cap-summary-list { margin: 0; padding-left: 20px; }
 .screen-cap .cap-summary-list li { margin-bottom: 4px; }
@@ -110,9 +110,13 @@
 /* Start / running */
 .screen-cap .cap-blocked { font-weight: 600; color: var(--warn-ink); background: var(--warn-bg); border-radius: 8px; padding: 8px 12px; }
 .screen-cap .cap-start .link-btn { display: block; margin: 8px auto 0; color: var(--accent); }
-.screen-cap .cap-running { border-color: var(--accent); background: var(--accent-soft); }
+.screen-cap .cap-running { border-color: var(--accent); background: var(--accent-soft); box-shadow: var(--glow); }
 .screen-cap .cap-running .btn { margin-top: 4px; }
 
 @media print {
   .screen-cap .cap-chips, .screen-cap .cap-editor { display: none; }
+}
+
+@media print {
+  .screen-cap * { filter: none !important; box-shadow: none !important; }
 }
