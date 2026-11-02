@@ -18,7 +18,8 @@ window.MOCK_DATA = {
     { id: "nausea", label: "Nausea" },
     { id: "light_sensitivity", label: "Light sensitivity" },
     { id: "sound_sensitivity", label: "Sound sensitivity" },
-    { id: "aura", label: "Aura" },
+    { id: "aura", label: "Aura",
+      hint: "Seeing flashing lights, zigzag lines, or blind spots, often shortly before or as a headache starts" },
     { id: "neck_tension", label: "Neck tension" }
   ],
   activities: [

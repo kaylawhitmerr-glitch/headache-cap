@@ -190,7 +190,8 @@ function log_renderEntry(appEl, id) {
       '<fieldset class="log-group"><legend>Symptoms</legend>';
   (md.symptoms || []).forEach(function (s) {
     html += '<label class="log-check"><input type="checkbox" name="symptom" value="' + esc(s.id) + '"' +
-      (e.symptoms.indexOf(s.id) !== -1 ? " checked" : "") + "> " + esc(s.label) + "</label>";
+      (e.symptoms.indexOf(s.id) !== -1 ? " checked" : "") + "> <span>" + esc(s.label) +
+      (s.hint ? '<span class="log-check-hint">' + esc(s.hint) + "</span>" : "") + "</span></label>";
   });
   html += "</fieldset>" +
       '<div class="field"><label for="log-activity">Activity</label><select id="log-activity">' +
