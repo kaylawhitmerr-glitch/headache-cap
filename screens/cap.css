@@ -7,7 +7,6 @@
 .screen-cap .cap-head-hair { fill: #3b2f5c; opacity: 0.85; }
 .screen-cap .cap-head-ear { fill: #f3e6da; stroke: var(--text); stroke-width: 2; stroke-linecap: round; }
 .screen-cap .cap-head-line { fill: none; stroke: #5b4a6e; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.screen-cap .cap-head-mouth { fill: #c9737f; stroke: #8a4a58; stroke-width: 1.2; stroke-linejoin: round; }
 .screen-cap .cap-head-side { font-size: 11px; fill: var(--muted); }
 .screen-cap .cap-hz { cursor: pointer; outline: none; }
 .screen-cap .cap-hz[aria-hidden="true"] { cursor: default; }
