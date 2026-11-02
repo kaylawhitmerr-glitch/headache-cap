@@ -1,0 +1,28 @@
+# Secrets: never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+secrets.*
+credentials.*
+
+# Installed packages
+node_modules/
+vendor/
+bower_components/
+.venv/
+venv/
+__pycache__/
+
+# OS and editor clutter
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+.idea/
+
+# Logs and local downloads
+*.log
+*.zip

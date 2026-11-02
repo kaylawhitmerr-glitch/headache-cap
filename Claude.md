@@ -232,6 +232,7 @@ At the foot: "Personal log of observations. Not a diagnosis." Add `@media print`
 ```
 prd.md               Product source of truth. Read only.
 Claude.md            This file. Update it when a rule, route, or field changes.
+.gitignore           Keeps secrets (.env, keys), installed packages, and clutter out of git.
 mock-data.js         Owns ALL mock data and editable lists/text (§4.1). Data only, no logic.
 index.html           Owns STYLES (shared), SHELL, UTIL, STORE, the sign-up screen, ROUTER; loads every other file.
 lib/insights.js      Owns INSIGHTS.
