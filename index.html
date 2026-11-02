@@ -238,6 +238,11 @@ body.no-nav .app-footer { padding-bottom: 16px; }
   .card { border: 0; padding: 0; }
 }
 </style>
+<link rel="stylesheet" href="screens/cap.css">
+<link rel="stylesheet" href="screens/feedback.css">
+<link rel="stylesheet" href="screens/log.css">
+<link rel="stylesheet" href="screens/insights.css">
+<link rel="stylesheet" href="screens/share.css">
 </head>
 <body>
 <!-- ===== SHELL ===== -->
@@ -263,8 +268,14 @@ body.no-nav .app-footer { padding-bottom: 16px; }
 </footer>
 
 <script src="mock-data.js"></script>
+<script src="lib/insights.js"></script>
+<script src="lib/charts.js"></script>
+<script src="screens/cap.js"></script>
+<script src="screens/feedback.js"></script>
+<script src="screens/log.js"></script>
+<script src="screens/insights.js"></script>
+<script src="screens/share.js"></script>
 <script>
-(function () {
 "use strict";
 
 /* ===== UTIL ===== */
@@ -641,16 +652,10 @@ var Store = (function () {
 })();
 
 /* ===== INSIGHTS ===== */
-// Pure functions: entries in, text out. Filled in a later step.
-// patternInsights(entries, md)      -> [{ ruleId, count, total, text }]
-// reliefBySetting(entries, md)      -> [{ zone, method, helped, rated, text }]
-// visibleSuggestions(patterns, md)  -> [{ id, ruleId, text }]
-// describeEntry(entry, md)          -> [string]   ("Your logged headache" lines)
+// Lives in lib/insights.js (see Claude.md section 5).
 
 /* ===== CHARTS ===== */
-// SVG strings from given numbers only. Filled in a later step.
-// barChart({ labels, values, title })   -> string
-// dotChart({ points, yMax, title })     -> string
+// Lives in lib/charts.js (see Claude.md section 5).
 
 /* ===== SCREENS ===== */
 function renderSignup(app) {
@@ -682,26 +687,17 @@ function renderSignup(app) {
   });
 }
 
-function renderStub(app, name) {
-  app.innerHTML = '<section class="card"><h2>' + esc(name) + "</h2></section>";
-}
-
-function renderCap(app) { renderStub(app, "Cap"); }
-function renderFeedback(app) { renderStub(app, "Feedback"); }
-function renderLog(app, params) {
-  renderStub(app, params && params.id ? "Your logged headache" : "Log");
-}
-function renderInsights(app) { renderStub(app, "Insights"); }
-function renderShare(app) { renderStub(app, "Share"); }
+// renderCap, renderFeedback, renderLog, renderInsights, renderShare live in screens/*.js.
 
 /* ===== ROUTER ===== */
+// Looked up when called, so one missing screen file can't break the others.
 var SCREENS = {
-  signup: renderSignup,
-  cap: renderCap,
-  feedback: renderFeedback,
-  log: renderLog,
-  insights: renderInsights,
-  share: renderShare
+  signup: function (a, p) { return renderSignup(a, p); },
+  cap: function (a, p) { return renderCap(a, p); },
+  feedback: function (a, p) { return renderFeedback(a, p); },
+  log: function (a, p) { return renderLog(a, p); },
+  insights: function (a, p) { return renderInsights(a, p); },
+  share: function (a, p) { return renderShare(a, p); }
 };
 var currentRoute = null;
 var tickHandle = null;
@@ -860,7 +856,6 @@ function start() {
 }
 
 start();
-})();
 </script>
 </body>
 </html>

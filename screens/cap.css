@@ -1,0 +1,118 @@
+/* ===== SCREEN STYLES: cap ===== */
+.screen-cap .cap-sub { font-size: 1rem; margin: 16px 0 8px; }
+
+/* Head diagram */
+.screen-cap .cap-head { display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto 8px; }
+.screen-cap .cap-head-outline { fill: #f3e6da; stroke: var(--text); stroke-width: 2; stroke-linejoin: round; }
+.screen-cap .cap-head-hair { fill: #6b5444; opacity: 0.85; }
+.screen-cap .cap-head-ear { fill: #f3e6da; stroke: var(--text); stroke-width: 2; stroke-linecap: round; }
+.screen-cap .cap-head-line { fill: none; stroke: var(--text); stroke-width: 1.6; stroke-linecap: round; }
+.screen-cap .cap-head-side { font-size: 11px; fill: var(--muted); }
+.screen-cap .cap-hz { cursor: pointer; outline: none; }
+.screen-cap .cap-hz[aria-hidden="true"] { cursor: default; }
+.screen-cap .cap-hz-hit rect { fill: transparent; }
+.screen-cap .cap-hz-leader { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+.screen-cap .cap-hz-shape .cap-hs > * { fill: var(--surface); stroke: var(--muted); stroke-width: 1.6; stroke-dasharray: 4 3; }
+.screen-cap .cap-hz-label { font-size: 13px; font-weight: 600; fill: var(--muted); }
+.screen-cap .cap-hz-shape .cap-hs-pressure > *,
+.screen-cap .cap-hz-shape .cap-hs-heat > *,
+.screen-cap .cap-hz-shape .cap-hs-cool > * { stroke: var(--text); stroke-dasharray: none; fill: var(--accent-soft); }
+.screen-cap .cap-hz-shape .cap-hs-heat > * { fill: var(--heat); }
+.screen-cap .cap-hz-shape .cap-hs-cool > * { fill: var(--cool); }
+.screen-cap .cap-hz-shape .cap-hs-press > * { stroke-width: 3; }
+.screen-cap .cap-hz.is-on .cap-hz-label { fill: var(--text); }
+.screen-cap .cap-hz.is-selected .cap-hz-shape > * > * { stroke: var(--accent); stroke-width: 3.5; }
+.screen-cap .cap-hz.is-selected .cap-hz-label { fill: var(--accent); text-decoration: underline; }
+.screen-cap .cap-hz:focus-visible .cap-hz-hit rect { stroke: var(--accent); stroke-width: 2; }
+
+/* Zone chips */
+.screen-cap .cap-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.screen-cap .cap-chip {
+  font: inherit;
+  font-size: 0.95rem;
+  min-height: 44px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+.screen-cap .cap-chip.is-on { background: var(--accent-soft); border-color: var(--accent); font-weight: 600; }
+.screen-cap .cap-chip.is-on::before { content: "\2713  "; color: var(--accent); }
+.screen-cap .cap-chip.is-selected { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* Editor + segmented controls */
+.screen-cap .cap-editor { border-top: 1px solid var(--border); padding-top: 12px; }
+.screen-cap .cap-ctrl { margin-bottom: 12px; }
+.screen-cap .cap-ctrl-label { display: block; font-weight: 600; margin-bottom: 6px; }
+.screen-cap .cap-seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.screen-cap .cap-seg-btn {
+  flex: 1 1 0;
+  min-width: 64px;
+  min-height: 44px;
+  font: inherit;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--surface);
+  color: var(--accent);
+  cursor: pointer;
+}
+.screen-cap .cap-seg-btn.is-on { background: var(--accent); color: var(--accent-ink); }
+.screen-cap .cap-seg-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.screen-cap .cap-hint { margin: 8px 0 0; font-size: 0.9rem; }
+
+/* Mockup */
+.screen-cap .cap-mk-views { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.screen-cap .cap-mk-view { margin: 0; text-align: center; }
+.screen-cap .cap-mk-view figcaption { font-size: 0.9rem; font-weight: 600; color: var(--muted); }
+.screen-cap .cap-mk { display: block; width: 100%; height: auto; }
+.screen-cap .cap-mk-head { fill: #f3e6da; stroke: var(--text); stroke-width: 1.8; stroke-linejoin: round; }
+.screen-cap .cap-mk-shell { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.screen-cap .cap-mk-strap { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round; }
+.screen-cap .cap-mk-cover { fill: #4a4f57; stroke: var(--text); stroke-width: 1.5; }
+.screen-cap .cap-pad > * { fill: var(--surface); stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 3 2; }
+.screen-cap .cap-pad-neutral > * { fill: var(--surface); stroke: var(--text); stroke-dasharray: none; }
+.screen-cap .cap-pad-heat > * { fill: var(--heat); stroke: var(--text); stroke-dasharray: none; }
+.screen-cap .cap-pad-cool > * { fill: var(--cool); stroke: var(--text); stroke-dasharray: none; }
+.screen-cap .cap-pmark circle { fill: var(--surface); stroke: var(--text); stroke-width: 1.4; }
+.screen-cap .cap-pmark .cap-pmark-dot { fill: var(--text); stroke: none; }
+
+.screen-cap .cap-legend {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.screen-cap .cap-legend li { display: inline-flex; align-items: center; gap: 6px; }
+.screen-cap .cap-sw {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--text);
+}
+.screen-cap .cap-sw-heat { background: var(--heat); }
+.screen-cap .cap-sw-cool { background: var(--cool); }
+.screen-cap .cap-sw-pressure { background: radial-gradient(circle, var(--text) 0 2px, var(--surface) 3px); border-radius: 50%; }
+.screen-cap .cap-sw-cover { background: #4a4f57; }
+
+.screen-cap .cap-summary-list { margin: 0; padding-left: 20px; }
+.screen-cap .cap-summary-list li { margin-bottom: 4px; }
+.screen-cap .cap-summary-empty { margin: 0; }
+
+/* Start / running */
+.screen-cap .cap-blocked { font-weight: 600; color: var(--warn-ink); background: var(--warn-bg); border-radius: 8px; padding: 8px 12px; }
+.screen-cap .cap-start .link-btn { display: block; margin: 8px auto 0; color: var(--accent); }
+.screen-cap .cap-running { border-color: var(--accent); background: var(--accent-soft); }
+.screen-cap .cap-running .btn { margin-top: 4px; }
+
+@media print {
+  .screen-cap .cap-chips, .screen-cap .cap-editor { display: none; }
+}

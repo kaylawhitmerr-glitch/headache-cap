@@ -1,0 +1,32 @@
+/* ===== SCREEN STYLES: feedback ===== */
+.screen-feedback .fb-zones { margin: 0 0 12px; padding-left: 20px; }
+.screen-feedback .fb-zones li { margin-bottom: 4px; overflow-wrap: anywhere; }
+.screen-feedback .fb-times { margin: 0; display: grid; gap: 4px; }
+.screen-feedback .fb-times div { display: flex; gap: 8px; flex-wrap: wrap; }
+.screen-feedback .fb-times dt { font-weight: 600; min-width: 64px; }
+.screen-feedback .fb-times dd { margin: 0; }
+.screen-feedback .fb-group { border: 0; padding: 0; margin: 0 0 20px; min-width: 0; }
+.screen-feedback .fb-group:last-child { margin-bottom: 0; }
+.screen-feedback .fb-group legend { font-weight: 600; padding: 0; margin-bottom: 8px; }
+.screen-feedback .fb-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 8px;
+}
+.screen-feedback .fb-choice {
+  font: inherit;
+  min-height: 52px;
+  padding: 8px 10px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+}
+.screen-feedback .fb-choice.is-on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.screen-feedback .fb-actions { display: grid; gap: 10px; }

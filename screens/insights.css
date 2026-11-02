@@ -1,0 +1,33 @@
+/* ===== SCREEN STYLES: insights ===== */
+.screen-insights .insights-title { font-size: 1.4rem; margin: 0 0 6px; }
+.screen-insights .insights-intro { margin: 0 0 8px; }
+.screen-insights .insights-sample { margin: 0 0 12px; }
+.screen-insights .insights-section h2 { font-size: 1.1rem; margin: 0 0 10px; }
+.screen-insights .insights-empty { margin: 0; }
+.screen-insights .insights-list { list-style: none; margin: 0; padding: 0; }
+.screen-insights .insights-item {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+.screen-insights .insights-item:last-child { margin-bottom: 0; }
+.screen-insights .insights-relief-text { display: block; margin-bottom: 6px; }
+.screen-insights .insights-bar { display: block; width: 100%; max-width: 240px; height: 8px; }
+.screen-insights .insights-bar-bg { fill: var(--border); }
+.screen-insights .insights-bar-fill { fill: var(--accent); }
+.screen-insights .insights-suggestion { border-left: 4px solid var(--accent); }
+.screen-insights .insights-nma {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: var(--warn-ink);
+  background: var(--warn-bg);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+@media print {
+  .screen-insights .insights-item { break-inside: avoid; }
+}

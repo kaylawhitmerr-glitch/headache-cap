@@ -1,0 +1,168 @@
+/* ===== SCREEN STYLES: log ===== */
+.screen-log .log-big {
+  min-height: 72px;
+  font-size: 1.25rem;
+  margin: 12px 0 8px;
+}
+.screen-log .log-switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+}
+.screen-log .log-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.screen-log .log-switch-track {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--border);
+  position: relative;
+  transition: background 0.15s;
+}
+.screen-log .log-switch-track::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--surface);
+  transition: transform 0.15s;
+}
+.screen-log .log-switch input:checked + .log-switch-track { background: var(--accent); }
+.screen-log .log-switch input:checked + .log-switch-track::after { transform: translateX(20px); }
+.screen-log .log-switch input:focus-visible + .log-switch-track { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.screen-log .log-sample {
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+.screen-log .log-list { list-style: none; margin: 0; padding: 0; }
+.screen-log .log-item { margin-bottom: 10px; padding: 12px; }
+.screen-log .log-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.screen-log .log-item-when { font-weight: 600; }
+.screen-log .log-pain {
+  font-size: 0.85rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-weight: 600;
+}
+.screen-log .log-item-summary { margin: 4px 0 8px; color: var(--muted); overflow-wrap: anywhere; }
+.screen-log .log-item-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.screen-log .log-tag {
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 10px;
+  color: var(--muted);
+}
+.screen-log .log-tag-cap { border-color: var(--accent); color: var(--accent); }
+.screen-log .log-item .btn { padding: 8px 14px; }
+
+.screen-log .log-back { padding-left: 0; margin-bottom: 4px; color: var(--accent); }
+.screen-log .log-lines { margin: 0; padding-left: 20px; }
+.screen-log .log-lines li { margin-bottom: 4px; overflow-wrap: anywhere; }
+.screen-log .log-saved {
+  margin: 10px 0 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.screen-log .log-group {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--gap);
+  min-width: 0;
+}
+.screen-log .log-group legend, .screen-log .log-legend {
+  font-weight: 700;
+  padding: 0;
+  margin-bottom: 8px;
+}
+.screen-log .log-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.screen-log .log-two > div { min-width: 0; }
+.screen-log input[type="date"], .screen-log input[type="time"] {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  font: inherit;
+  padding: 10px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  min-height: 44px;
+}
+.screen-log .log-pain-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+.screen-log .log-chip {
+  min-height: 44px;
+  min-width: 0;
+  font: inherit;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+.screen-log .log-chip[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.screen-log .log-chip-wide { grid-column: span 1; font-size: 0.85rem; }
+.screen-log .log-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-weight: 400;
+  margin: 0;
+  cursor: pointer;
+}
+.screen-log .log-check input { width: 22px; height: 22px; margin: 0; }
+.screen-log .log-session {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+.screen-log .log-actions { margin-top: 8px; }
+.screen-log .log-actions .btn { flex: 1 1 120px; }
+
+@media (min-width: 520px) {
+  .screen-log .log-pain-row { grid-template-columns: repeat(12, 1fr); }
+  .screen-log .log-chip-wide { font-size: 0.75rem; }
+}
