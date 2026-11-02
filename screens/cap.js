@@ -139,7 +139,12 @@ function renderCap(appEl, params) {
           '<path class="cap-head-outline" d="M160,42 C206,40 224,82 222,124 C221,170 196,212 160,214 C124,212 99,170 98,124 C96,82 114,40 160,42 Z"/>' +
           '<path class="cap-head-ear" d="M99,118 C88,114 86,150 98,154"/>' +
           '<path class="cap-head-ear" d="M221,118 C232,114 234,150 222,154"/>' +
-          '<path class="cap-head-line" d="M140,126 q6,-5 12,0 M168,126 q6,-5 12,0 M156,150 q4,12 -2,16 M146,182 q14,8 28,0"/>' +
+          '<path class="cap-head-line" d="M140,126 q6,-5 12,0 M168,126 q6,-5 12,0"/>' +
+          // nose: bridge, wings, and nostrils
+          '<path class="cap-head-line" d="M155,140 C154,152 151,159 148,164 M165,140 C166,152 169,159 172,164 M148,164 C144,170 150,175 155,171 M172,164 C176,170 170,175 165,171 M155,171 C157,174 163,174 165,171"/>' +
+          // mouth: lips with the line between them
+          '<path class="cap-head-mouth" d="M145,188 C151,184 156,184 160,187 C164,184 169,184 175,188 C169,197 151,197 145,188 Z"/>' +
+          '<path class="cap-head-line" d="M145,188 C152,191 168,191 175,188"/>' +
           '<path class="cap-head-hair" d="M102,100 C104,58 130,42 160,42 C192,42 216,58 218,100 C206,72 184,64 160,64 C136,64 114,72 102,100 Z"/>';
         var zs = md().zones || [];
         for (var i = 0; i < zs.length; i++) {
