@@ -81,7 +81,7 @@ window.MOCK_DATA = {
   ],
   sides:        [ { id: "left", label: "Left" }, { id: "right", label: "Right" }, { id: "both", label: "Both" } ],
   symptoms:     [ { id: "nausea", label: "Nausea" }, { id: "light_sensitivity", label: "Light sensitivity" },
-                  { id: "sound_sensitivity", label: "Sound sensitivity" }, { id: "aura", label: "Aura" },
+                  { id: "sound_sensitivity", label: "Sound sensitivity" },
                   { id: "neck_tension", label: "Neck tension" } ],
   activities:   [ { id: "screen_work", label: "Screen work" }, { id: "meeting", label: "Meeting" },
                   { id: "commuting", label: "Commuting" }, { id: "exercise", label: "Exercise" },
@@ -285,7 +285,7 @@ Run all of these before calling a change done:
 
 **Decided with the team:** `index.html` plus `mock-data.js`, with one JS and one CSS file per screen and separate files for insights and charts (§5); save in the browser; printable share page; water and caffeine as counts; activity from a fixed list; feedback as helped / didn't / not sure plus duration ranges; prevention suggestion text drafted by Claude and reviewed by the team; feedback Save creates the entry and a pending session waits for Save or Discard (§3); relief by setting credits a method's rating to every zone that used it, with "not sure" in the denominator (§4.5); `high_caffeine` is the seed's 2-match rule (§4.4); one parallel builder per file.
 
-**Defaults the team approved:** pain 0–10; the five symptoms listed above; timer 10/20/30 min; patterns need 3+ matches; codes listed in mock data; hand-drawn SVG charts.
+**Defaults the team approved:** pain 0–10; the four symptoms listed above (aura was removed); timer 10/20/30 min; patterns need 3+ matches; codes listed in mock data; hand-drawn SVG charts.
 
 **Assumed by Claude, not yet confirmed (change freely):**
 - Inputs: screen time entered in hours; side is set per zone (one setting for a zone, not separate left and right settings); pain picked from a row of 0–10 buttons.

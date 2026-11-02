@@ -18,7 +18,6 @@ window.MOCK_DATA = {
     { id: "nausea", label: "Nausea" },
     { id: "light_sensitivity", label: "Light sensitivity" },
     { id: "sound_sensitivity", label: "Sound sensitivity" },
-    { id: "aura", label: "Aura" },
     { id: "neck_tension", label: "Neck tension" }
   ],
   activities: [
@@ -284,7 +283,7 @@ window.MOCK_DATA = {
       session: null,
       feedback: null,
       pain: 6,
-      symptoms: ["light_sensitivity", "aura"],
+      symptoms: ["light_sensitivity"],
       activity: "sleeping",
       screenTimeHours: null,
       waterGlasses: null,

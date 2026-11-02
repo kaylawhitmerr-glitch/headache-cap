@@ -572,7 +572,12 @@ var Store = (function () {
     st.account = (isObj(acct) && typeof acct.code === "string" && has(codes, acct.code)) ? { code: acct.code, createdAt: acct.createdAt || nowLocal() } : null;
     var list = Array.isArray(parsed.entries) ? parsed.entries : [];
     var kept = [], dropped = !Array.isArray(parsed.entries), seenIds = [];
+    var symIds = ids(MD.symptoms);
     list.forEach(function (e) {
+      // Drop symptoms that were removed from MOCK_DATA instead of discarding the whole entry
+      if (isObj(e) && Array.isArray(e.symptoms)) {
+        e.symptoms = e.symptoms.filter(function (s) { return has(symIds, s); });
+      }
       if (validateEntry(e) && !has(seenIds, e.id)) { kept.push(e); seenIds.push(e.id); }
       else dropped = true;
     });
