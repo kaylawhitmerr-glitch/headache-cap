@@ -14,14 +14,14 @@ function renderInsights(appEl, params) {
   var html = '';
   html += '<div class="screen-insights">';
   html += '<h1 class="insights-title">Insights</h1>';
-  html += '<p class="insights-intro muted">These are observations counted from your own logs, nothing more.</p>';
+  html += '<p class="insights-intro muted">Patterns counted from your own logs. Observations only, not medical advice.</p>';
   if (hasSeed) {
     html += '<p class="note insights-sample">Includes sample entries for testing.</p>';
   }
 
   // Observed Patterns
   html += '<section class="card insights-section" aria-labelledby="ins-patterns-h">';
-  html += '<h2 id="ins-patterns-h">Observed Patterns</h2>';
+  html += '<h2 id="ins-patterns-h">Observed patterns</h2>';
   if (patterns.length) {
     html += '<ul class="insights-list">';
     patterns.forEach(function (p) {

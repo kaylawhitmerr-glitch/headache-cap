@@ -91,7 +91,7 @@ function renderCap(appEl, params) {
         var h = '<ul class="cap-summary-list">';
         for (var i = 0; i < list.length; i++) {
           var z = list[i];
-          h += '<li data-zone="' + esc(z.zone) + '"><strong>' + esc(labelOf(md().zones, z.zone)) + "</strong> — " +
+          h += '<li data-zone="' + esc(z.zone) + '"><strong>' + esc(labelOf(md().zones, z.zone)) + "</strong>: " +
             esc(sideText(z.side)) + ": " + esc(settingText(z)) + "</li>";
         }
         return h + "</ul>";
@@ -269,7 +269,7 @@ function renderCap(appEl, params) {
       }
 
       function timerOptions() {
-        var out = [{ id: "none", label: "No timer" }];
+        var out = [{ id: "none", label: "Off" }];
         var t = md().timerOptions || [];
         for (var i = 0; i < t.length; i++) out.push({ id: String(t[i]), label: t[i] + " min" });
         return out;

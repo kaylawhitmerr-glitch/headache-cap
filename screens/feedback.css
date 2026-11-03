@@ -10,23 +10,26 @@
 .screen-feedback .fb-group legend { font-weight: 600; padding: 0; margin-bottom: 8px; }
 .screen-feedback .fb-choices {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
   gap: 8px;
 }
 .screen-feedback .fb-choice {
   font: inherit;
-  min-height: 52px;
+  font-size: 0.9375rem;
+  min-height: 44px;
   padding: 8px 10px;
-  border: 2px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: transparent;
   color: var(--text);
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
+  white-space: nowrap;
 }
+.screen-feedback .fb-choice:hover { background: var(--surface-2); }
 .screen-feedback .fb-choice.is-on {
   border-color: var(--accent);
   background: var(--accent-soft);
-  color: var(--accent);
+  color: var(--text);
 }
 .screen-feedback .fb-actions { display: grid; gap: 10px; }

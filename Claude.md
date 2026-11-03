@@ -14,7 +14,7 @@ What we are building: a real app with a **simulated cap**, running on **mock dat
 4. **No ES modules and no fetching.** No `type="module"`, `import`, `export`, `fetch`, or `XMLHttpRequest`; browsers block these on `file://`. Load every `.js` file with a plain `<script src="…"></script>` and every `.css` file with `<link rel="stylesheet" href="…">`, in the §5 load order. SVG is written inline without an `xmlns` attribute (it isn't needed in HTML, and it contains a URL that fails the §6.2 check). Don't use the words *import* or *export* in comments either.
 5. **No network at all.** The app never contacts anything. Mock data is the only data source apart from what the tester enters.
 6. **Saving:** tester entries are kept in `localStorage` and survive a reload. All access goes through the STORE section, wrapped in `try/catch`. If storage is unavailable, run in memory and show a small banner: "Changes won't be saved in this browser."
-7. **Reset:** a "Reset to mock data" control clears storage and reloads the seed data from `mock-data.js`.
+7. **Reset:** a "Reset demo data" control clears storage and reloads the seed data from `mock-data.js`.
 8. **Phone first:** works at 360 px wide with no sideways scrolling, and also looks fine on a laptop.
 9. **Lists and text live in `mock-data.js`**, not hard-coded in `index.html`: zones, symptoms, activities, timer options, duration ranges, thresholds, and suggestion text.
 10. **Build order** (PRD §5): cap zones with heat/cooling → pressure → cap mockup → log → feedback → Observed Patterns → relief-by-setting insight → share page → prevention suggestions. This is a **priority order**: if time runs short, cut from the end. It is not a strict sequence; independent sections may be built in parallel (rule 1).
@@ -44,7 +44,7 @@ Hash routes, so it works on `file://`. Only the ROUTER section reads `location.h
 | `#/signup` | Sign-up | Enter the box code. An invalid code shows "That code doesn't match a cap." A valid one creates the account and goes to `#/cap`. |
 | `#/cap` | Cap | Tappable head diagram, per-zone controls, timer, **cap mockup** showing the current settings (eye and ear coverings drawn as part of the cap), Start / End session. Start needs at least one zone in use. While a session is pending feedback, Start is disabled with "Give feedback on your last session first." |
 | `#/feedback` | Feedback | Shown when a session ends (End tapped or timer done). For each method used: helped / didn't help / not sure. How long the headache lasted (range). Every answer is optional. **Save** creates the entry (below) and goes to `#/log/<id>`. **Discard session** (with a confirm step) drops the pending session and goes to `#/cap`. |
-| `#/log` | Log | Log-only switch, then the big "A headache occurred" button (one-tap log). Tapping it creates the entry and goes to `#/log/<id>`. Below that, the **history list** (newest first) with Edit and Delete on each entry. |
+| `#/log` | Log | Log-only switch, then the big "A headache occurred" button (one-tap log). Tapping it creates the entry and goes to `#/log/<id>`. Below that, the **history list** (newest first): tapping a row opens it at `#/log/<id>`, where it can be edited or deleted. |
 | `#/log/<id>` | Log (entry) | The **"Your logged headache"** summary card at the top, then the "Add details" form filled in for this entry. Save updates the entry and refreshes the card. An unknown id goes to `#/log`. |
 | `#/insights` | Insights | "Observed Patterns", relief by setting, prevention suggestions (each with "Not medical advice."). |
 | `#/share` | Share | Printable doctor page (§4.6) with a Print button (`window.print()`). |
@@ -60,7 +60,7 @@ Hash routes, so it works on `file://`. Only the ROUTER section reads `location.h
 - **"Add details" form** (on `#/log/<id>`): date and time it started (`occurredAt`), log-only switch, pain (a row of 0–10 buttons plus "Not set"), symptoms (checkboxes), activity (a list with "Not set"), screen time hours (number, step 0.5), water glasses, caffeinated drinks. If the entry has feedback, the feedback answers and duration are editable too. The session's zones and times are shown but not editable. Clearing a field sets it back to `null`.
 - **Delete:** asks "Delete this entry?" first; then removes it and goes to (or stays on) `#/log`.
 - **Sample data note:** while any entry's id starts with `seed_`, `#/log` and `#/insights` show a small note: "Includes sample entries for testing."
-- **Reset to mock data:** a small link in the footer, with a confirm step. It also clears the account, so the app returns to `#/signup`.
+- **Reset demo data:** a small link in the footer, with a confirm step. It also clears the account, so the app returns to `#/signup`.
 
 ## 4. Data contract
 

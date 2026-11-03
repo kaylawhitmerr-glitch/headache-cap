@@ -58,7 +58,7 @@ function log_renderList(appEl) {
       '<label class="log-switch" for="log-only">' +
         '<input type="checkbox" id="log-only" checked>' +
         '<span class="log-switch-track" aria-hidden="true"></span>' +
-        "<span>Log only — I didn't use the cap</span>" +
+        "<span>I didn't use the cap</span>" +
       "</label>" +
       '<button type="button" class="btn btn-block log-big" id="log-occurred">A headache occurred</button>' +
       '<p class="note">One tap is enough. You can add details next if you like.</p>' +
@@ -72,19 +72,15 @@ function log_renderList(appEl) {
   } else {
     html += '<ul class="log-list">';
     entries.forEach(function (e) {
-      html += '<li class="card log-item">' +
-        '<div class="log-item-head">' +
-          '<span class="log-item-when">' + esc(fmtDate(e.occurredAt)) + " · " + esc(fmtTime(e.occurredAt)) + "</span>" +
-          (e.pain !== null ? '<span class="log-pain">Pain ' + esc(e.pain) + "/10</span>" : "") +
-        "</div>" +
-        '<p class="log-item-summary">' + esc(log_summary(e)) + "</p>" +
-        '<div class="log-item-foot">' +
-          '<span class="log-tag' + (e.session ? " log-tag-cap" : "") + '">' + (e.session ? "Cap session" : "Log only") + "</span>" +
-          '<span class="btn-row">' +
-            '<button type="button" class="btn btn-secondary" data-edit="' + esc(e.id) + '">Edit</button>' +
-            '<button type="button" class="btn btn-danger" data-del="' + esc(e.id) + '">Delete</button>' +
+      html += '<li class="log-item">' +
+        '<button type="button" class="log-row" data-edit="' + esc(e.id) + '" aria-label="Open entry from ' + esc(fmtDate(e.occurredAt)) + '">' +
+          '<span class="log-row-main">' +
+            '<span class="log-item-when">' + esc(fmtDate(e.occurredAt)) + '<span class="log-item-time"> ' + esc(fmtTime(e.occurredAt)) + "</span></span>" +
+            '<span class="log-item-summary">' + (e.session ? '<span class="log-tag-cap">Cap</span>' : "") + esc(log_summary(e)) + "</span>" +
           "</span>" +
-        "</div>" +
+          (e.pain !== null ? '<span class="log-pain">' + esc(e.pain) + '<span class="log-pain-of">/10</span></span>' : "") +
+          '<svg class="log-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>' +
+        "</button>" +
       "</li>";
     });
     html += "</ul>";
@@ -117,10 +113,8 @@ function log_renderList(appEl) {
   var list = appEl.querySelector(".log-list");
   if (list) {
     list.addEventListener("click", function (ev) {
-      var t = ev.target.closest("button");
-      if (!t) return;
-      if (t.hasAttribute("data-edit")) go("#/log/" + t.getAttribute("data-edit"));
-      else if (t.hasAttribute("data-del")) log_confirmDelete(t.getAttribute("data-del"));
+      var t = ev.target.closest("[data-edit]");
+      if (t) go("#/log/" + t.getAttribute("data-edit"));
     });
   }
 }
@@ -175,7 +169,7 @@ function log_renderEntry(appEl, id) {
         '<label class="log-switch" for="log-form-only">' +
           '<input type="checkbox" id="log-form-only"' + (e.logOnly ? " checked" : "") + ">" +
           '<span class="log-switch-track" aria-hidden="true"></span>' +
-          "<span>Log only — I didn't use the cap</span>" +
+          "<span>I didn't use the cap</span>" +
         "</label>" +
         '<p class="error" data-err="logOnly" hidden></p>' +
       "</div>" +

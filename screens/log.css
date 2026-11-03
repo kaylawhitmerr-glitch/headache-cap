@@ -1,8 +1,8 @@
 /* ===== SCREEN STYLES: log ===== */
 .screen-log .log-big {
-  min-height: 72px;
-  font-size: 1.25rem;
-  margin: 12px 0 8px;
+  min-height: 56px;
+  font-size: 1.0625rem;
+  margin: 16px 0 8px;
 }
 .screen-log .log-switch {
   display: flex;
@@ -37,62 +37,82 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--surface);
+  background: var(--text);
   transition: transform 0.15s;
 }
 .screen-log .log-switch input:checked + .log-switch-track { background: var(--accent); }
+.screen-log .log-switch { font-weight: 500; }
 .screen-log .log-switch input:checked + .log-switch-track::after { transform: translateX(20px); }
 .screen-log .log-switch input:focus-visible + .log-switch-track { outline: 3px solid var(--accent); outline-offset: 2px; }
 
-.screen-log .log-sample {
-  background: var(--warn-bg);
-  color: var(--warn-ink);
-  border-radius: 8px;
-  padding: 6px 10px;
-}
-.screen-log .log-list { list-style: none; margin: 0; padding: 0; }
-.screen-log .log-item { margin-bottom: 10px; padding: 12px; }
-.screen-log .log-item-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.screen-log .log-item-when { font-weight: 600; }
-.screen-log .log-pain {
-  font-size: 0.85rem;
-  background: var(--accent-soft);
-  color: var(--accent);
-  border-radius: 999px;
-  padding: 2px 10px;
-  font-weight: 600;
-}
-.screen-log .log-item-summary { margin: 4px 0 8px; color: var(--muted); overflow-wrap: anywhere; }
-.screen-log .log-item-foot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.screen-log .log-tag {
-  font-size: 0.8rem;
+.screen-log .log-history h2 { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.screen-log .log-sample { margin: -4px 0 12px; color: var(--faint); }
+.screen-log .log-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 2px 10px;
-  color: var(--muted);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
 }
-.screen-log .log-tag-cap { border-color: var(--accent); color: var(--accent); }
-.screen-log .log-item .btn { padding: 8px 14px; }
+.screen-log .log-item + .log-item { border-top: 1px solid var(--border); }
+.screen-log .log-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 64px;
+  padding: 12px 14px 12px 16px;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.screen-log .log-row:hover { background: var(--surface-2); }
+.screen-log .log-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.screen-log .log-row-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.screen-log .log-item-when { font-weight: 600; font-size: 0.9375rem; }
+.screen-log .log-item-time { color: var(--muted); font-weight: 400; }
+.screen-log .log-item-summary {
+  color: var(--muted);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.screen-log .log-tag-cap {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(164, 151, 255, 0.35);
+  border-radius: 4px;
+  padding: 0 5px;
+  margin-right: 8px;
+  vertical-align: 1px;
+}
+.screen-log .log-pain {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+.screen-log .log-pain-of { color: var(--faint); font-weight: 400; font-size: 0.8125rem; }
+.screen-log .log-chev { flex: 0 0 auto; width: 16px; height: 16px; fill: none; stroke: var(--faint); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-.screen-log .log-back { padding-left: 0; margin-bottom: 4px; color: var(--accent); }
+.screen-log .log-back { padding-left: 0; margin-bottom: 4px; color: var(--muted); text-decoration: none; }
 .screen-log .log-lines { margin: 0; padding-left: 20px; }
 .screen-log .log-lines li { margin-bottom: 4px; overflow-wrap: anywhere; }
 .screen-log .log-saved {
   margin: 10px 0 0;
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 600;
 }
 .screen-log .log-group {
   border: 0;
@@ -101,7 +121,7 @@
   min-width: 0;
 }
 .screen-log .log-group legend, .screen-log .log-legend {
-  font-weight: 700;
+  font-weight: 600;
   padding: 0;
   margin-bottom: 8px;
 }
@@ -117,9 +137,9 @@
   min-width: 0;
   font: inherit;
   padding: 10px 8px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
   border-radius: 8px;
-  background: var(--surface);
+  background: var(--bg);
   color: var(--text);
   min-height: 44px;
 }
@@ -133,16 +153,18 @@
   min-width: 0;
   font: inherit;
   font-weight: 600;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
   border-radius: 8px;
-  background: var(--surface);
+  background: transparent;
   color: var(--text);
+  font-variant-numeric: tabular-nums;
   cursor: pointer;
 }
+.screen-log .log-chip:hover { background: var(--surface-2); }
 .screen-log .log-chip[aria-pressed="true"] {
-  background: var(--accent);
+  background: var(--accent-soft);
   border-color: var(--accent);
-  color: var(--accent-ink);
+  color: var(--text);
 }
 .screen-log .log-chip-wide { grid-column: span 1; font-size: 0.85rem; }
 .screen-log .log-check {
@@ -154,7 +176,7 @@
   margin: 0;
   cursor: pointer;
 }
-.screen-log .log-check input { width: 22px; height: 22px; margin: 0; }
+.screen-log .log-check input { width: 20px; height: 20px; margin: 0; accent-color: var(--accent); }
 .screen-log .log-session {
   border-top: 1px solid var(--border);
   padding-top: 12px;
