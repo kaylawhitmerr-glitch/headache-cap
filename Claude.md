@@ -1,4 +1,4 @@
-# Claude.md — Headache Comfort Cap prototype (MVP)
+# Claude.md — SpotOn headache comfort cap prototype (MVP)
 
 Read `prd.md` first. It is the product source of truth; this file says how to build the class prototype from it. If the two disagree, stop and ask. Do not edit `prd.md` unless asked.
 

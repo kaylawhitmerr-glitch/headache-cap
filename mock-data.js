@@ -1,4 +1,4 @@
-/* Headache Comfort Cap prototype: mock data only (read-only, no logic). See Claude.md section 4. */
+/* SpotOn (headache comfort cap) prototype: mock data only (read-only, no logic). See Claude.md section 4. */
 window.MOCK_DATA = {
   version: 1,
   validCodes: ["HCC-4821", "HCC-7730", "HCC-1205"],
