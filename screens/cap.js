@@ -99,25 +99,25 @@ function renderCap(appEl, params) {
 
       /* ---------- head diagram (tappable) ---------- */
 
-      // Shapes per zone on a front view of the head (viewer's left = wearer's right).
+      // Shapes per zone on the head diagram. Sides match the screen: the left shape is the wearer's left.
       var HEAD_ZONES = {
         eyes: {
-          shapes: [['right', '<path d="M160,112 L137,112 A13,13 0 0 0 137,138 L160,138 Z"/>'], ['left', '<path d="M160,112 L183,112 A13,13 0 0 1 183,138 L160,138 Z"/>']],
+          shapes: [['left', '<path d="M160,112 L137,112 A13,13 0 0 0 137,138 L160,138 Z"/>'], ['right', '<path d="M160,112 L183,112 A13,13 0 0 1 183,138 L160,138 Z"/>']],
           label: { x: 312, y: 200, anchor: "end" }, leader: "M300,190 L196,132",
           hit: '<rect x="214" y="180" width="104" height="40"/>'
         },
         temples: {
-          shapes: [['right', '<circle cx="116" cy="92" r="13"/>'], ['left', '<circle cx="204" cy="92" r="13"/>']],
+          shapes: [['left', '<circle cx="116" cy="92" r="13"/>'], ['right', '<circle cx="204" cy="92" r="13"/>']],
           label: { x: 8, y: 56, anchor: "start" }, leader: "M30,62 L106,86",
           hit: '<rect x="2" y="36" width="104" height="40"/>'
         },
         above_ears: {
-          shapes: [['right', '<rect x="80" y="104" width="24" height="11" rx="5.5"/>'], ['left', '<rect x="216" y="104" width="24" height="11" rx="5.5"/>']],
+          shapes: [['left', '<rect x="80" y="104" width="24" height="11" rx="5.5"/>'], ['right', '<rect x="216" y="104" width="24" height="11" rx="5.5"/>']],
           label: { x: 312, y: 56, anchor: "end" }, leader: "M286,62 L240,106",
           hit: '<rect x="206" y="36" width="112" height="40"/>'
         },
         behind_ears: {
-          shapes: [['right', '<rect x="72" y="140" width="11" height="26" rx="5.5"/>'], ['left', '<rect x="237" y="140" width="11" height="26" rx="5.5"/>']],
+          shapes: [['left', '<rect x="72" y="140" width="11" height="26" rx="5.5"/>'], ['right', '<rect x="237" y="140" width="11" height="26" rx="5.5"/>']],
           label: { x: 8, y: 214, anchor: "start" }, leader: "M30,200 L74,162",
           hit: '<rect x="2" y="194" width="112" height="40"/>'
         }
@@ -162,8 +162,8 @@ function renderCap(appEl, params) {
             '<text class="cap-hz-label" x="' + g.label.x + '" y="' + g.label.y + '" text-anchor="' + g.label.anchor + '">' + esc(zs[i].label) + "</text>" +
             "</g>";
         }
-        h += '<text class="cap-head-side" x="104" y="244" text-anchor="middle">Your right</text>' +
-          '<text class="cap-head-side" x="216" y="244" text-anchor="middle">Your left</text>';
+        h += '<text class="cap-head-side" x="104" y="244" text-anchor="middle">Left</text>' +
+          '<text class="cap-head-side" x="216" y="244" text-anchor="middle">Right</text>';
         return h + "</svg>";
       }
 
