@@ -55,11 +55,6 @@ function log_renderList(appEl) {
   var html = '<div class="screen-log">' +
     '<section class="card log-quick">' +
       "<h2>Log a headache</h2>" +
-      '<label class="log-switch" for="log-only">' +
-        '<input type="checkbox" id="log-only" checked>' +
-        '<span class="log-switch-track" aria-hidden="true"></span>' +
-        "<span>I didn't use the cap</span>" +
-      "</label>" +
       '<button type="button" class="btn btn-block log-big" id="log-occurred">A headache occurred</button>' +
       '<p class="note">One tap is enough. You can add details next if you like.</p>' +
       '<p class="error" id="log-quick-error" role="alert" hidden></p>' +
@@ -91,7 +86,7 @@ function log_renderList(appEl) {
   appEl.querySelector("#log-occurred").addEventListener("click", function () {
     var saved = Store.saveEntry({
       occurredAt: nowLocal(),
-      logOnly: appEl.querySelector("#log-only").checked,
+      logOnly: true, // cap sessions are logged from the feedback screen
       session: null,
       feedback: null,
       pain: null,

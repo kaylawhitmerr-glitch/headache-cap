@@ -26,7 +26,7 @@ Never break these, even if a request seems to ask for it. Ask first.
 - **Comfort only.** Never diagnose, never say whether a headache is normal or abnormal, never give medication advice (no drug names, doses, or "take/skip" wording). There is no medication field.
 - **Insights are observations of the user's own logs**, and they are rule-based (no AI). Phrase them as "In your logs…" or "X of your Y logged headaches…". Never say *causes*, *triggers*, *because*, *diagnosis*, *abnormal*, *treat*, *cure*, or predict anything.
 - **Every prevention suggestion shows "Not medical advice."** right next to it.
-- **The minimum log is one tap:** "A headache occurred." Every other field is optional. A **log-only switch** ("Log only — I didn't use the cap", on by default) sets `logOnly` on the entry.
+- **The minimum log is one tap:** "A headache occurred." Every other field is optional. A headache logged from the Log tab is saved as log only (`logOnly: true`), since cap sessions are logged from the feedback screen; the edit form keeps an "I didn't use the cap" switch for corrections.
 - **The app works only with a cap code.** The only way in is sign-up with a valid personal code from the box (in the mock data, `validCodes`). The check trims spaces and ignores case (`hcc-4821 ` works). A code can be used again after Reset; there is no record of used codes.
 - **Data stays on the device.** Nothing is sent anywhere. The doctor share page is produced only when the user taps for it, and the user decides what to do with it.
 - **Users can edit and delete any entry.**
@@ -44,7 +44,7 @@ Hash routes, so it works on `file://`. Only the ROUTER section reads `location.h
 | `#/signup` | Sign-up | Enter the box code. An invalid code shows "That code doesn't match a cap." A valid one creates the account and goes to `#/cap`. |
 | `#/cap` | Cap | Tappable head diagram, per-zone controls, timer, **cap mockup** showing the current settings (eye and ear coverings drawn as part of the cap), Start / End session. Start needs at least one zone in use. While a session is pending feedback, Start is disabled with "Give feedback on your last session first." |
 | `#/feedback` | Feedback | Shown when a session ends (End tapped or timer done). For each method used: helped / didn't help / not sure. How long the headache lasted (range). Every answer is optional. **Save** creates the entry (below) and goes to `#/log/<id>`. **Discard session** (with a confirm step) drops the pending session and goes to `#/cap`. |
-| `#/log` | Log | Log-only switch, then the big "A headache occurred" button (one-tap log). Tapping it creates the entry and goes to `#/log/<id>`. Below that, the **history list** (newest first): tapping a row opens it at `#/log/<id>`, where it can be edited or deleted. |
+| `#/log` | Log | The big "A headache occurred" button (one-tap log, saved as log only). Tapping it creates the entry and goes to `#/log/<id>`. Below that, the **history list** (newest first): tapping a row opens it at `#/log/<id>`, where it can be edited or deleted. |
 | `#/log/<id>` | Log (entry) | The **"Your logged headache"** summary card at the top, then the "Add details" form filled in for this entry. Save updates the entry and refreshes the card. An unknown id goes to `#/log`. |
 | `#/insights` | Insights | "Observed Patterns", relief by setting, prevention suggestions (each with "Not medical advice."). |
 | `#/share` | Share | Printable doctor page (§4.6) with a Print button (`window.print()`). |
@@ -291,7 +291,7 @@ Run all of these before calling a change done:
 - Inputs: screen time entered in hours; side is set per zone (one setting for a zone, not separate left and right settings); pain picked from a row of 0–10 buttons.
 - Insight rules: thresholds of 6 h screen time, ≤3 glasses of water, and 3+ caffeinated drinks; time-of-day buckets as in §4.5; patterns use `occurredAt`; ties go to list order; "Other" is never reported as a pattern.
 - Sessions: a timer ending on any screen jumps to feedback; entries made from feedback start at the session start.
-- Log screen: after a one-tap log, the app opens that entry; the log-only switch is on by default; delete asks to confirm; session zones are read-only when editing.
+- Log screen: after a one-tap log, the app opens that entry; one-tap logs are saved as log only; delete asks to confirm; session zones are read-only when editing.
 - Saved data: an entry that fails validation is dropped alone rather than resetting everything.
 - Cap and sign-up: eye and ear coverings are drawn but not switchable; codes ignore case and spaces and are reusable after Reset.
 - Mock data: seed dates 2026-09-07 to 2026-10-18 with a "sample entries" note.
